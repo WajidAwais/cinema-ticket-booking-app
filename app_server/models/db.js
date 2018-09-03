@@ -13,15 +13,18 @@ mongoose.connection.on("error", (err) => {
   console.error("MongoDB connection error:", err.message);
 });
 
-// Connects and, on an empty database, writes the demo catalogue so the
-// pages have something to show. Seeding happens here, once, instead of in a
-// GET handler.
-async function connect(uri = process.env.MONGODB_URI || DEFAULT_URI) {
-  await mongoose.connect(uri);
+// Writes the demo catalogue into an empty database so the pages have
+// something to show. Seeding happens here, at startup, not in a GET handler.
+async function seedCatalog() {
   if ((await Cinema.estimatedDocumentCount()) === 0) {
     await Cinema.insertMany(cinemas);
   }
+}
+
+async function connect(uri = process.env.MONGODB_URI || DEFAULT_URI) {
+  await mongoose.connect(uri);
+  await seedCatalog();
   return mongoose.connection;
 }
 
-module.exports = { connect };
+module.exports = { connect, seedCatalog };
