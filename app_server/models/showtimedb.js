@@ -1,13 +1,4 @@
 const mongoose = require("mongoose");
-// Connecting is db.js's job, not a model's.
-//
-// This file used to call mongoose.connect() itself, hardcoded to
-// `mongodb://localhost/showtimedb`. Three model files each did that, naming three
-// different databases — but mongoose has a single default connection, so the
-// last call simply won and every model wrote to the same place. In a container
-// the three localhost calls also failed outright, logging connection errors on
-// every start while the app appeared to work.
-//define schema here
 var time_schema = mongoose.Schema({
   time1: {
     type: Date,
@@ -45,6 +36,10 @@ var movie_schema = mongoose.Schema({
   image: {
     data: Buffer,
     contentType: String
+  },
+  // File name under public/img/thumbnails.
+  poster: {
+    type: String
   },
   description1: {
     type: String,
@@ -93,7 +88,6 @@ var cin_schema = mongoose.Schema({
   },
   description: {
     type: String
-    //required : true
   },
   movList: [movie_schema]
 });

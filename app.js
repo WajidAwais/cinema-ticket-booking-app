@@ -1,61 +1,49 @@
-var express = require("express");
-var mongoose = require("mongoose");
-var db1 = require("./app_server/models/db");
-var http = require("http");
+const path = require("node:path");
+const express = require("express");
+const db = require("./app_server/models/db");
+const routes = require("./app_server/routes/route");
+const format = require("./app_server/lib/format");
 
-var path = require("path");
-var app = express();
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-const route = require("./app_server/routes/route");
+const app = express();
 
 app.set("views", path.join(__dirname, "app_server", "views"));
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
+app.locals.format = format;
 
-//adding static files
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-//routes
+app.use("/", routes);
 
-app.use("/", route);
-global.globalString = "This can be accessed anywhere!";  
-//app.use("/api", route1);
-// Database setup lives in app_server/models/db.js, which is required at the
-// top of this file. A duplicate copy of the connection logic sat here,
-// commented out — including a second `mongoose.connect()` call and a hardcoded
-// connection string.
+app.use((req, res) => {
+  res.status(404).render("error.html", {
+    title: "Not found",
+    heading: "We couldn't find that page",
+    message: "The film, cinema or booking you asked for doesn't exist.",
+  });
+});
 
-var port = normalizePort(process.env.PORT || "3000");
-app.set("port", port);
+// Express 5 forwards rejected promises from async handlers to here.
+app.use((err, req, res, next) => {
+  console.error(err);
+  if (res.headersSent) return next(err);
+  res.status(500).render("error.html", {
+    title: "Something went wrong",
+    heading: "Something went wrong",
+    message: "The booking service hit an error. Please try again in a moment.",
+  });
+});
 
-/**
- * Create HTTP server.
- */
+module.exports = app;
 
-var server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen(port);
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
+if (require.main === module) {
+  const port = Number(process.env.PORT) || 3000;
+  db.connect()
+    .then(() => {
+      app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
+    })
+    .catch((err) => {
+      console.error("Could not connect to MongoDB:", err.message);
+      process.exit(1);
+    });
 }

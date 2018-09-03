@@ -1,0 +1,110 @@
+// Demo catalogue, written to MongoDB on first start when the cinemas
+// collection is empty. The cinemas are made up; the films match the poster
+// images bundled in public/img/thumbnails.
+
+const films = {
+  nun: {
+    movieid: 1,
+    title: "The Nun",
+    genre: "Horror",
+    language: "English",
+    rating1: 5.3,
+    poster: "thenun.jpg",
+    description1: "A priest and a novice are sent to a Romanian abbey to investigate a nun's death.",
+  },
+  robin: {
+    movieid: 2,
+    title: "Christopher Robin",
+    genre: "Family",
+    language: "English",
+    rating1: 7.3,
+    poster: "christopherRobin.jpg",
+    description1: "A grown-up Christopher Robin is visited by Winnie the Pooh and his old friends.",
+  },
+  rampage: {
+    movieid: 3,
+    title: "Rampage",
+    genre: "Action",
+    language: "English",
+    rating1: 6.1,
+    poster: "rampage.jpg",
+    description1: "A primatologist tries to stop three animals mutated by a rogue experiment.",
+  },
+  quiet: {
+    movieid: 4,
+    title: "A Quiet Place",
+    genre: "Thriller",
+    language: "English",
+    rating1: 7.5,
+    poster: "aQuietPlace.jpg",
+    description1: "A family lives in silence to hide from creatures that hunt by sound.",
+  },
+  aquaman: {
+    movieid: 5,
+    title: "Aquaman",
+    genre: "Adventure",
+    language: "English",
+    rating1: 6.8,
+    poster: "aquaman.jpg",
+    description1: "The heir to Atlantis has to decide between the land and the sea.",
+  },
+  sanju: {
+    movieid: 6,
+    title: "Sanju",
+    genre: "Biography",
+    language: "Hindi",
+    rating1: 7.7,
+    poster: "sanju.jpg",
+    description1: "A biopic covering the turbulent life of a Bollywood actor.",
+  },
+  parwaaz: {
+    movieid: 7,
+    title: "Parwaaz Hai Junoon",
+    genre: "Drama",
+    language: "Urdu",
+    rating1: 7.0,
+    poster: "parwajhaijunoon.jpeg",
+    description1: "Young air force cadets train to become fighter pilots.",
+  },
+};
+
+const cinemas = [
+  {
+    id: 1,
+    cinema_name: "Mall Road Picture House",
+    location: "Mall Road, Lahore",
+    capacity: 220,
+    reserved: 0,
+    goldPrice: 950,
+    silverPrice: 600,
+    rating: 4.4,
+    description: "A restored single-screen hall with a balcony and gold-class recliners.",
+    movList: [films.nun, films.robin, films.parwaaz, films.sanju],
+  },
+  {
+    id: 2,
+    cinema_name: "Seaview Screens",
+    location: "Clifton, Karachi",
+    capacity: 340,
+    reserved: 0,
+    goldPrice: 1100,
+    silverPrice: 700,
+    rating: 4.1,
+    description: "Four screens by the beach, including the city's largest auditorium.",
+    movList: [films.aquaman, films.rampage, films.quiet, films.sanju],
+  },
+  {
+    id: 3,
+    cinema_name: "Blue Area Cineplex",
+    location: "Blue Area, Islamabad",
+    capacity: 180,
+    reserved: 0,
+    goldPrice: 900,
+    silverPrice: 550,
+    rating: 3.9,
+    description: "A compact multiplex a short walk from the Blue Area offices.",
+    movList: [films.quiet, films.nun, films.parwaaz, films.robin, films.aquaman],
+  },
+];
+
+module.exports = { cinemas };

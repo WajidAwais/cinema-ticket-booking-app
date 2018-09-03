@@ -1,0 +1,8 @@
+<% if (errors && errors.length) { %>
+<div class="notice notice-error" role="alert">
+  <p><strong>Please check your booking:</strong></p>
+  <ul>
+    <% errors.forEach(function (message) { %><li><%= message %></li><% }); %>
+  </ul>
+</div>
+<% } %>

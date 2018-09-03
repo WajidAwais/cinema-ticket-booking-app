@@ -1,0 +1,311 @@
+/* Movie Ticketing: velvet seats, brass fittings, a cream programme card. */
+:root {
+  --velvet: #8c1c2b;
+  --velvet-dark: #6b1220;
+  --brass: #a97a26;
+  --cream: #fbf6ee;
+  --paper: #ffffff;
+  --ink: #221b18;
+  --muted: #5d524c;
+  --line: #e4d8c6;
+  --error-bg: #fbe9e9;
+  --radius: 10px;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Work Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font: 400 1rem/1.6 var(--font-body);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+}
+h1 { font-size: clamp(1.75rem, 4vw, 2.6rem); }
+h2 { font-size: 1.35rem; }
+p { margin: 0 0 1rem; }
+
+a { color: var(--velvet); }
+a:hover { color: var(--velvet-dark); }
+
+:focus-visible {
+  outline: 3px solid var(--brass);
+  outline-offset: 2px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -48px;
+  padding: 8px 12px;
+  background: var(--ink);
+  color: var(--cream);
+  z-index: 10;
+}
+.skip-link:focus { top: 8px; }
+
+/* Header */
+.site-header {
+  background: var(--velvet);
+  color: var(--cream);
+  border-bottom: 4px solid var(--brass);
+}
+.header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--cream);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+.wordmark span { color: #f2d28c; margin-left: 0.15em; }
+.wordmark:hover { color: #fff; }
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-list a {
+  color: var(--cream);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
+.nav-list a:hover { border-bottom-color: #f2d28c; color: #fff; }
+
+main { flex: 1; padding-top: 32px; padding-bottom: 48px; }
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9rem;
+  padding: 20px 0;
+}
+.site-footer p { margin: 0; }
+
+/* Shared blocks */
+.page-intro { margin-bottom: 24px; max-width: 46rem; }
+.page-intro.with-poster { display: flex; gap: 20px; align-items: flex-end; max-width: none; }
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--brass);
+  margin-bottom: 0.4rem;
+}
+.film-meta { color: var(--muted); font-size: 0.95rem; }
+
+.button {
+  display: inline-block;
+  background: var(--velvet);
+  color: var(--cream);
+  border: 2px solid var(--velvet);
+  border-radius: 999px;
+  padding: 10px 22px;
+  font: 600 1rem/1.2 var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+}
+.button:hover { background: var(--velvet-dark); border-color: var(--velvet-dark); color: #fff; }
+.button[disabled] { opacity: 0.7; cursor: progress; }
+.button-quiet { background: transparent; color: var(--velvet); }
+.button-quiet:hover { background: var(--velvet); color: var(--cream); }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.panel {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.notice {
+  background: #fff7e2;
+  border-left: 4px solid var(--brass);
+  padding: 10px 14px;
+  border-radius: 4px;
+}
+.notice-error { background: var(--error-bg); border-left-color: var(--velvet); }
+.notice ul { margin: 0; padding-left: 1.2rem; }
+
+.empty {
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* Landing */
+.landing {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+  padding-top: 24px;
+}
+.landing h1 { font-size: clamp(2rem, 5vw, 3.2rem); max-width: 18ch; }
+.landing-note { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+
+/* Films */
+.film-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.film {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 20px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.film-poster {
+  width: 100%;
+  max-width: 140px;
+  height: auto;
+  aspect-ratio: 9 / 13;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--line);
+}
+.with-poster .film-poster { max-width: 110px; }
+
+/* Booking steps */
+.steps ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  counter-reset: step;
+}
+.steps li {
+  counter-increment: step;
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding: 4px 12px 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+}
+.steps li::before { content: counter(step) ". "; }
+.steps li[aria-current] { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+/* Cinemas */
+.cinema-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.cinema {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--velvet);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.cinema .button { margin-top: auto; align-self: flex-start; }
+.prices { display: flex; gap: 24px; margin: 0 0 16px; }
+.prices dt { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.prices dd { margin: 0; font-weight: 600; }
+
+/* Forms */
+.field { margin: 0 0 20px; border: 0; padding: 0; }
+.field label, .field legend { display: block; font-weight: 600; margin-bottom: 6px; }
+.field-row { display: flex; flex-wrap: wrap; gap: 0 24px; }
+.hint { color: var(--muted); font-size: 0.9rem; margin: 4px 0 0; }
+input[type=number], input[type=text], select {
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid #b7a995;
+  border-radius: 6px;
+  padding: 8px 10px;
+  min-width: 8rem;
+}
+.choice { display: flex; align-items: center; gap: 8px; font-weight: 400 !important; margin: 0 0 8px; }
+.choice input { accent-color: var(--velvet); width: 1.1rem; height: 1.1rem; }
+.chip {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 12px;
+  margin: 0 6px 8px 0;
+  background: var(--cream);
+}
+.day { font-weight: 600; margin: 12px 0 6px; color: var(--muted); }
+
+/* Checkout and confirmation */
+.checkout { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; align-items: start; }
+.summary { margin: 0; }
+.summary div { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.summary dt { color: var(--muted); }
+.summary dd { margin: 0; text-align: right; font-weight: 500; }
+.summary .total { border-bottom: 0; font-size: 1.15rem; }
+.summary .total dd { font-weight: 700; color: var(--velvet); }
+.ticket { max-width: 34rem; border-style: dashed; border-width: 2px; }
+.profile { max-width: 34rem; }
+
+/* Bookings table */
+.table-scroll { overflow-x: auto; }
+.bookings { width: 100%; border-collapse: collapse; background: var(--paper); }
+.bookings th, .bookings td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.bookings th { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.bookings .num { text-align: right; }
+
+@media (max-width: 640px) {
+  main { padding-top: 20px; }
+  .landing { grid-template-columns: 1fr; padding-top: 0; }
+  .film { grid-template-columns: 96px minmax(0, 1fr); gap: 14px; padding: 12px; }
+  .panel { padding: 16px; }
+  .wordmark { font-size: 1.3rem; }
+}
