@@ -1,10 +1,7 @@
-# The ticketing app and its database.
-#
-# The connection string used to be hardcoded in the source, credentials
-# included. It comes from the environment now.
+# The ticketing app and its database. Run: docker compose up -d --build
 services:
   mongo:
-    image: mongo:6.0
+    image: mongo:7
     restart: unless-stopped
     volumes:
       - mongo-data:/data/db
@@ -16,9 +13,8 @@ services:
       start_period: 5s
 
   web:
-    build: { context: ., dockerfile: Dockerfile }
-    image: movie-ticketing:local
-    container_name: ticketing_web
+    build: .
+    restart: unless-stopped
     environment:
       MONGODB_URI: mongodb://mongo:27017/ticketing
       PORT: 3000
