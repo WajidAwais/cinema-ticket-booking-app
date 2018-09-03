@@ -18,12 +18,12 @@
     <tbody>
       <% bookings.forEach(function (b) { %>
       <tr>
-        <td><a href="/paymentsummary.html?id=<%= b._id %>"><%= format.reference(b._id) %></a></td>
-        <td><%= b.movie %></td>
-        <td><%= b.cinema %></td>
-        <td><%= format.showtime(b.showtime) %></td>
-        <td><%= b.seats %> <%= b.seatClass %></td>
-        <td class="num"><%= format.rupees(b.total) %></td>
+        <td data-label="Reference"><a href="/paymentsummary.html?id=<%= b._id %>"><%= format.reference(b._id) %></a></td>
+        <td data-label="Film"><%= b.movie %></td>
+        <td data-label="Cinema"><%= b.cinema %></td>
+        <td data-label="Showtime"><%= format.showtime(b.showtime) %></td>
+        <td data-label="Seats"><%= b.seats %> <%= b.seatClass %></td>
+        <td data-label="Paid" class="num"><%= format.rupees(b.total) %></td>
       </tr>
       <% }); %>
     </tbody>
