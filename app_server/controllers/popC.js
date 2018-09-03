@@ -1,6 +1,4 @@
 var mongoose = require("mongoose");
-var express = require('express');
-var request = require("request");
 var payment = mongoose.model("payment1");
 var apiOptions = {
     server: "http://localhost:3000"

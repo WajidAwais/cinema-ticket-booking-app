@@ -5,23 +5,16 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "node --test tests/"
+    "dev": "node --watch app.js",
+    "test": "node --test"
   },
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "cors": "^2.8.4",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
-    "mongoose": "^8.8.3",
-    "path": "^0.12.7",
-    "request": "^2.88.0"
+    "mongoose": "^8.8.3"
   },
   "engines": {
-    "node": "~6.11.1",
-    "npm": "~6.4.1"
-  },
-  "devDependencies": {
-    "nodemon": "^1.18.5"
+    "node": ">=22.12 <23"
   }
 }

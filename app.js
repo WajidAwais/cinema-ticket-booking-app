@@ -2,16 +2,11 @@ var express = require("express");
 var mongoose = require("mongoose");
 var db1 = require("./app_server/models/db");
 var http = require("http");
-var bodyParser = require('body-parser');
-//var bodyparser = require('body-parser');
-//var cors = require("cors");
 
 var path = require("path");
 var app = express();
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 const route = require("./app_server/routes/route");
 
 app.set("views", path.join(__dirname, "app_server", "views"));

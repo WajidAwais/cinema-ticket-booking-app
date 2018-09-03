@@ -1,6 +1,5 @@
 var mongoose = require("mongoose");
 var payment = mongoose.model("history");
-var request= require("request");
 
 module.exports.savePop1=function(req,res)
 {
