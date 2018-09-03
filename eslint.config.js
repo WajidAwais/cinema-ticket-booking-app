@@ -3,7 +3,7 @@ const globals = require("globals");
 
 module.exports = [
   {
-    ignores: ["node_modules/", "project_venv/", "public/js/jquery/", "public/js/bootstrap/", "public/js/plugins/", "public/js/active.js"],
+    ignores: ["node_modules/", "project_venv/"],
   },
   js.configs.recommended,
   {
